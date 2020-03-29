@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {StatsComponent} from "./algo/stats.component";
+import {StatsComponent} from "./stats/stats.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'stats', pathMatch: 'full'},

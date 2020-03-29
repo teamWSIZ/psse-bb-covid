@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DailyReport} from "./daily-report";
+import {DailyReport} from './daily-report';
 
 
 @Component({
@@ -10,6 +10,7 @@ import {DailyReport} from "./daily-report";
 export class StatsComponent implements OnInit {
 
   raport: DailyReport;  //to będzie raport do celów testowych
+  reverse_dates = false;
   bb_reports: DailyReport[] = [];
   zy_reports: DailyReport[] = [];
 
@@ -26,6 +27,8 @@ export class StatsComponent implements OnInit {
     this.bb_reports.push(new DailyReport(new Date('2020-03-28'), 11, 678, 1596));
     this.bb_reports.push(new DailyReport(new Date('2020-03-29'), 11, 669, 1541));
 
+    this.sort_reports();
+
     this.zy_reports.push(new DailyReport(new Date('2020-03-27'), 0, 129, 445));
   }
 
@@ -36,5 +39,12 @@ export class StatsComponent implements OnInit {
 
   save_new_report() {
     this.bb_reports.push(this.raport);
+  }
+
+  sort_reports() {
+    this.bb_reports.sort((a, b) => a.date.getTime() - b.date.getTime());
+    if (this.reverse_dates) {
+      this.bb_reports.reverse();
+    }
   }
 }

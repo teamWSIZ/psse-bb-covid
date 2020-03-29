@@ -1,37 +1,7 @@
 <div class="row no-gutters">
-  <div class="col-md-5">
-    <div class="card">
-      <div class="card-header">Algo1</div>
-      <div class="card-body">
-        <p> <button class="btn btn-outline-primary" (click)="check()"> Sprawdź</button>
-          <p>
-          Wynik: {{wynik}} <br>
-          Odwrócona tablica: {{tab_reversed}} <br>
-          Suma: {{visible_sum}}
-          </p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-header">Algo2</div>
-      <div class="card-body">
-        <form>
-          <input class="form-control" name="input_algo_2" [(ngModel)]="napis">
-        </form>
+  <div class="col-md-2"></div>
 
-
-        <p> <button class="btn btn-outline-primary" (click)="analyze()"> Analizuj</button>
-          <p>
-          Tablica: {{tab_from_string}} <br>
-          Liczb <10: {{less_than_ten}} <br>
-          Liczb >20: {{more_than_twenty}} <br>
-          Możliwe wycięcie 3x5: {{shape_possible}} <br>
-          Tablica liczb pośrednich (10<=x<=20) {{tab_good_numbers}}
-          </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-7">
+  <div class="col-md-8">
     <div class="card m-2">
       <div class="card-header h4"> PSSE Bielsko -- Covid-19</div>
       <div class="card-body">
@@ -46,7 +16,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let p of bb_raports">
+          <tr *ngFor="let p of bb_reports">
             <td> {{p.date | date:'M / d'}}</td>
             <td> {{p.suspected}}</td>
             <td> {{p.quarantine}}</td>
@@ -70,6 +40,8 @@
 
     </div>
   </div>
+
+  <div class="col-md-2"></div>
 </div>
 
 
@@ -85,31 +57,30 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
           <form>
-
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">Data</span>
+                <span class="input-group-text w-100" id="basic-addon1">Data</span>
               </div>
               <input type="date" class="form-control" name="input_date" placeholder="Data" aria-describedby="basic-addon1"
                      [(ngModel)]="raport.date">
             </div>
             <div class="input-group mb-3" >
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon2">Hospitalizacje</span>
+                <span class="input-group-text w-100" id="basic-addon2">Hospitalizacje</span>
               </div>
               <input type="number" class="form-control" name="input_date" placeholder="Data" aria-describedby="basic-addon1"
                      [(ngModel)]="raport.suspected">
             </div>
             <div class="input-group mb-3" >
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon3">Kwarantanna</span>
+                <span class="input-group-text w-100" id="basic-addon3">Kwarantanna</span>
               </div>
               <input type="number" class="form-control" name="input_date" placeholder="Data" aria-describedby="basic-addon1"
                      [(ngModel)]="raport.quarantine">
             </div>
             <div class="input-group mb-3" >
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon4">Monitoring</span>
+                <span class="input-group-text w-100" id="basic-addon4">Monitoring</span>
               </div>
               <input type="number" class="form-control" name="input_date" placeholder="Data" aria-describedby="basic-addon1"
                      [(ngModel)]="raport.monitored">

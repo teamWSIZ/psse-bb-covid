@@ -1,14 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {FormsComponent} from "./forms/forms.component";
-import {AlgoComponent} from "./algo/algo.component";
+import {StatsComponent} from "./algo/stats.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
+  { path: '', redirectTo: 'stats', pathMatch: 'full'},
   { path: 'home', component: HomeComponent },
-  { path: 'forms', component: FormsComponent },
-  { path: 'algo', component: AlgoComponent },
+  { path: 'stats', component: StatsComponent },
 ];
 
 @NgModule({

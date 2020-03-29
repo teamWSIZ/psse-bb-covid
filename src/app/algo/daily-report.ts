@@ -1,5 +1,5 @@
 //to jest tzw. klasa danych (dataclass)
-export class DailyRaport {
+export class DailyReport {
   date: Date;
   suspected: number;  // == confirmed cases
   quarantine: number;

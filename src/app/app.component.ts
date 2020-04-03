@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'webstart2019';
+
+  constructor(private router : Router) {
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.key === '`') {
+      this.router.navigate(['adm']);
+    }
+  }
+
 }

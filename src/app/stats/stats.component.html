@@ -1,4 +1,4 @@
-<div class="row no-gutters">
+<div class="row no-gutters"   (keydown.enter)="g.admin=!g.admin">
   <div class="col-md-2"></div>
 
   <div class="col-md-8">
@@ -6,9 +6,9 @@
       <div class="card-header h4"> Powiat Bielsko-Biała</div>
       <div class="card-body">
 
-        <table class="table table-hover">
+        <table class="table table-hover" >
           <thead class="thead-dark">
-          <tr>
+          <tr >
             <th scope="col" class="clickable" (click)="this.reverse_dates=!this.reverse_dates; sort_reports()">Data</th>
             <th scope="col">Hospitalizacje</th>
             <th scope="col">Kwarantanna</th>
@@ -16,7 +16,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let p of bb_reports">
+          <tr *ngFor="let p of bbReports">
             <td> {{p.date | date:'M / d'}}</td>
             <td> {{p.suspected}}</td>
             <td> {{p.quarantine}}</td>
@@ -27,13 +27,16 @@
 
 
       </div>
+
+      <div *ngIf="g.admin">ADMIN MODE</div>
+
+
       <div class="card-footer">
         <div class="text-right">
-          <button class="btn btn-outline-info"
+          <button class="btn btn-outline-info" *ngIf="g.admin"
                   data-toggle="modal"
                   data-target="#aaamodal"
-                  (click)="new_report()"
-          >dodaj</button>
+                  (click)="clear_edited_report()">dodaj</button>
         </div>
       </div>
 
@@ -42,7 +45,6 @@
 
   <div class="col-md-2"></div>
 </div>
-
 
 
 <!--Modals-->
@@ -60,29 +62,29 @@
               <div class="input-group-prepend">
                 <span class="input-group-text w-100" id="basic-addon1">Data</span>
               </div>
-              <input type="date" class="form-control" name="input_date" placeholder="Data" aria-describedby="basic-addon1"
-                     [(ngModel)]="raport.date">
+              <input type="date" class="form-control" name="input_date"
+                     [ngModel]="edited_report.date |  date:'yyyy-MM-dd'" (ngModelChange)="edited_report.date=$event">
             </div>
-            <div class="input-group mb-3" >
+            <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text w-100" id="basic-addon2">Hospitalizacje</span>
               </div>
-              <input type="number" class="form-control" name="input_date" placeholder="Data" aria-describedby="basic-addon1"
-                     [(ngModel)]="raport.suspected">
+              <input type="number" class="form-control" name="input_susp"
+                     [(ngModel)]="edited_report.suspected">
             </div>
-            <div class="input-group mb-3" >
+            <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text w-100" id="basic-addon3">Kwarantanna</span>
               </div>
-              <input type="number" class="form-control" name="input_date" placeholder="Data" aria-describedby="basic-addon1"
-                     [(ngModel)]="raport.quarantine">
+              <input type="number" class="form-control" name="input_quar"
+                     [(ngModel)]="edited_report.quarantine">
             </div>
-            <div class="input-group mb-3" >
+            <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text w-100" id="basic-addon4">Monitoring</span>
               </div>
-              <input type="number" class="form-control" name="input_date" placeholder="Data" aria-describedby="basic-addon1"
-                     [(ngModel)]="raport.monitored">
+              <input type="number" class="form-control" name="input_mon"
+                     [(ngModel)]="edited_report.monitored">
             </div>
           </form>
 

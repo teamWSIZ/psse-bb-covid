@@ -1,7 +1,28 @@
-<nav class="navbar navbar-expand-md bg-dark navbar-dark nav-fill"  id="topbar">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark nav-fill"
 
-  <img class="navbar-brand" src="assets/covid_blue_brand.jpeg" style="height: 70px">
+     id="topbar">
+
+  <img class="navbar-brand" src="assets/covid_blue_brand1.jpeg" style="height: 70px">
   <a class="navbar-brand" href="#">covid-19</a>
+
+
+  <div class="collapse navbar-collapse justify-content-left" id="nav1">
+    <ul class="navbar-nav" >
+
+      <li class="nav-item mr-4">
+        <a class="nav-link" href="#" [routerLink]="['/stats']">statystyki </a>
+      </li>
+
+      <li class="nav-item mr-4">
+        <a class="nav-link" href="#" [routerLink]="['/stats']">opieka </a>
+      </li>
+
+      <li class="nav-item mr-4">
+        <a class="nav-link" href="#" [routerLink]="['/stats']">kontakt </a>
+      </li>
+
+    </ul>
+  </div>
 
   <button class="navbar-toggler" type="button"
           data-toggle="collapse"
@@ -11,20 +32,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse justify-content-left" id="nav1">
-
-    <ul class="navbar-nav" >
-
-      <li class="nav-item mr-4">
-        <a class="nav-link" href="#" [routerLink]="['/stats']">statystyki </a>
-      </li>
-
-      <li class="nav-item mr-4">
-        <a class="nav-link" href="#" [routerLink]="['/stats']">kontakt </a>
-      </li>
 
 
-    </ul>
-  </div>
-
+<!--  <div id="log">login</div>-->
 </nav>

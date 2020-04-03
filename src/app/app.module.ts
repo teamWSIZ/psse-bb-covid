@@ -9,6 +9,8 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {ChartsModule} from "ng2-charts";
 import { StatsComponent } from './stats/stats.component';
+import { AdmComponent } from './adm/adm.component';
+import { HealthComponent } from './health/health.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { StatsComponent } from './stats/stats.component';
     HomeComponent,
     MenuComponent,
     StatsComponent,
+    AdmComponent,
+    HealthComponent,
   ],
   imports: [
     BrowserModule,

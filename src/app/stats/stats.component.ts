@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {DailyReport} from './daily-report';
 import {GService} from '../g.service';
+import {ActivatedRoute, Router} from "@angular/router";
+import {RegionNode} from "../_model/region-node";
+import {CaseData} from "../_model/case-data";
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -9,31 +13,31 @@ import {GService} from '../g.service';
   styleUrls: ['./stats.component.less']
 })
 export class StatsComponent implements OnInit {
+  edited_report: DailyReport;  //editing?
 
-  edited_report: DailyReport;  //to będzie raport do celów testowych
-  reverse_dates = false;
-  bbReports: DailyReport[] = [];
-  zyReports: DailyReport[] = [];
+  case_data: CaseData[];
 
-  constructor(public g: GService) {
+  nodeid: number;
+  node = RegionNode.dummy();
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router,
+              public g: GService) {
   }
 
   ngOnInit() {
-    this.bbReports.push(new DailyReport(new Date('2020-03-24'), 12, 575, 1398));
-    this.bbReports.push(new DailyReport(new Date('2020-03-25'), 10, 659, 1616));
-    this.bbReports.push(new DailyReport(new Date('2020-03-26'), 7, 651, 1694));
-    this.bbReports.push(new DailyReport(new Date('2020-03-27'), 10, 674, 1520));
-    this.bbReports.push(new DailyReport(new Date('2020-03-28'), 11, 678, 1596));
-    this.bbReports.push(new DailyReport(new Date('2020-03-29'), 11, 669, 1541));
-    this.bbReports.push(new DailyReport(new Date('2020-03-30'), 12, 650, 1555));
-    this.bbReports.push(new DailyReport(new Date('2020-03-31'), 8, 594, 1562));
-    this.bbReports.push(new DailyReport(new Date('2020-04-01'), 10, 561, 1607));
-    this.bbReports.push(new DailyReport(new Date('2020-04-02'), 7, 566, 1697));
+    this.route.params.subscribe(params => {
+      console.log(`node: ${params['nodeid']}`);
+      this.nodeid = parseInt(params['nodeid']);
+      console.log(`calling for timeline of node ${this.nodeid}`);
 
-    this.sort_reports();
+      this.g.load_nodes().subscribe(nn => {
+        this.node = this.g.nodes.get(this.nodeid);
+        this.load_timeline_data(this.nodeid);
+      });
+    })
 
-    this.zyReports.push(new DailyReport(new Date('2020-03-27'), 0, 129, 445));
     this.clear_edited_report();
+
   }
 
 
@@ -41,15 +45,20 @@ export class StatsComponent implements OnInit {
     this.edited_report = new DailyReport(new Date(), 0, 0, 0);
   }
 
-  save_new_report() {
-    this.bbReports.push(this.edited_report);
-    this.clear_edited_report();
+
+  private load_timeline_data(nodeid: number) {
+    console.log(`loading timeline for node ${nodeid}`);
+    let url = this.g.data + `/timeline/${nodeid}`;
+    this.http.get<CaseData[]>(url).subscribe(dd => {
+      this.case_data = dd;
+    });
   }
 
-  sort_reports() {
-    this.bbReports.sort((a, b) => a.date.getTime() - b.date.getTime());
-    if (this.reverse_dates) {
-      this.bbReports.reverse();
-    }
+  save_new_report() {
+  }
+
+
+  navigate_to_region(nodeid: number) {
+    this.router.navigate(['/details', nodeid]);
   }
 }

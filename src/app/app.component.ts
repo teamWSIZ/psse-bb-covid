@@ -1,5 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {Router} from '@angular/router';
+import {GService} from "./g.service";
 
 
 @Component({
@@ -9,13 +10,17 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
 
-  constructor(private router : Router) {
+  constructor(private router: Router, private g: GService) {
   }
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    if (event.key === '`') {
-      this.router.navigate(['adm']);
+    // console.log(event.key);
+    // console.log(event.ctrlKey);
+    if (event.key === 'ArrowLeft' && event.ctrlKey) {
+      this.g.add_date(-1);
+    } else if (event.key === 'ArrowRight' && event.ctrlKey) {
+      this.g.add_date(1);
     }
   }
 

@@ -1,26 +1,44 @@
-<div class="row no-gutters"   (keydown.enter)="g.admin=!g.admin">
+<div class="row no-gutters">
   <div class="col-md-2"></div>
 
   <div class="col-md-8">
     <div class="card m-2">
-      <div class="card-header h4"> Powiat Bielsko-Biała</div>
+      <div class="card-header">
+
+        <div class="row">
+          <div class="col-md-6 h4">
+            Region: {{node.name}}
+          </div>
+          <div class="col-md-6 text-right">
+            <button class="btn btn-outline-info" (click)="navigate_to_region(node.pid)">^ region ^</button>
+          </div>
+        </div>
+
+      </div>
+
       <div class="card-body">
 
-        <table class="table table-hover" >
+        <table class="table table-hover">
           <thead class="thead-dark">
-          <tr >
-            <th scope="col" class="clickable" (click)="this.reverse_dates=!this.reverse_dates; sort_reports()">Data</th>
-            <th scope="col">Hospitalizacje</th>
-            <th scope="col">Kwarantanna</th>
-            <th scope="col">Monitorowanie</th>
+          <tr>
+            <th scope="col">Data</th>
+            <th scope="col" title="Łącznie z wynikiem dodatnim">wynik (+)</th>
+            <th scope="col" title="Nowe z wynikiem dodatnim">nowe wynik (+)</th>
+            <th scope="col" title="Suma nowych z wynikiem dodatnim za ostatnie 7 dni">średnia wynik (+)  </th>
+            <th scope="col" title="Kwarantanna na dziś">kwarantanna</th>
+            <th scope="col" title="Średnia liczba przypadków w kwarantannie za ostatnie 7 dni">średnia kwarantanna</th>
+            <th scope="col" title="Suma przypadków śmiertelnych">zmarłych</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let p of bbReports">
-            <td> {{p.date | date:'M / d'}}</td>
-            <td> {{p.suspected}}</td>
-            <td> {{p.quarantine}}</td>
-            <td> {{p.monitored}} </td>
+          <tr *ngFor="let d of case_data">
+            <td class="w-40">{{d.data | date: 'yyyy-MM-dd'}}</td>
+            <td class="w-10">{{d.p}}</td>
+            <td class="w-10">{{d.np}}</td>
+            <td class="w-10">{{d.np7}}</td>
+            <td class="w-10">{{d.q}}</td>
+            <td class="w-10">{{d.q7}}</td>
+            <td class="w-10">{{d.d}}</td>
           </tr>
           </tbody>
         </table>
@@ -28,16 +46,9 @@
 
       </div>
 
-      <div *ngIf="g.admin">ADMIN MODE</div>
-
 
       <div class="card-footer">
-        <div class="text-right">
-          <button class="btn btn-outline-info" *ngIf="g.admin"
-                  data-toggle="modal"
-                  data-target="#aaamodal"
-                  (click)="clear_edited_report()">dodaj</button>
-        </div>
+
       </div>
 
     </div>

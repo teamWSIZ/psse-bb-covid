@@ -1,0 +1,69 @@
+<div class="row no-gutters" >
+  <div class="col-md-2"></div>
+
+  <div class="col-md-8">
+    <div class="card m-2">
+      <div class="card-header">
+      <div class="row">
+        <div class="col-md-6 h4">Region: {{node.name}}
+
+        </div>
+        <div class="col-md-3">
+          <form>
+            <div class="form-group" title="Działają też Ctrl+strzałki do zmiany daty">
+              <span class="info clickable" (click)="g.add_date(-1)"> <<  </span>
+              <input class="" name="day" id="day" type="date"
+                     [ngModel]="g.gdate | date:'yyyy-MM-dd'" (ngModelChange)="set_ed_date($event)">
+              <span class="info clickable" (click)="g.add_date(1)"> >> </span>
+            </div>
+          </form>
+
+
+        </div>
+        <div class="col-md-3 text-right"><button class="btn btn-outline-info"
+                                      (click)="navigate_to_region(node.pid)">^ region ^</button></div>
+      </div>
+      </div>
+      <div class="card-body">
+
+        <table class="table table-hover" >
+          <thead class="thead-dark">
+          <tr >
+            <th scope="col">Region</th>
+            <th scope="col" title="Łącznie z wynikiem dodatnim">wynik (+)</th>
+            <th scope="col" title="Nowe z wynikiem dodatnim">nowe wynik (+)</th>
+            <th scope="col" title="Suma nowych z wynikiem dodatnim za ostatnie 7 dni">średnia wynik (+)  </th>
+            <th scope="col" title="Kwarantanna na dziś">kwarantanna</th>
+            <th scope="col" title="Średnia liczba przypadków w kwarantannie za ostatnie 7 dni">średnia kwarantanna</th>
+            <th scope="col" title="Suma przypadków śmiertelnych">zmarłych</th>
+            <th scope="col">historia</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let d of subnode_data">
+            <td class="clickable w-30" (click)="navigate_to_region(d.nodeid)">{{g.nodes.get(d.nodeid).name}}</td>
+            <td class="w-10">{{d.p}}</td>
+            <td class="w-10">{{d.np}}</td>
+            <td class="w-10">{{d.np7}}</td>
+            <td class="w-10">{{d.q}}</td>
+            <td class="w-10">{{d.q7}}</td>
+            <td class="w-10">{{d.d}}</td>
+            <td class="w-10 info clickable" (click)="navigate_timeline(d.nodeid)"> >> </td>
+          </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+
+
+      <div class="card-footer">
+        <div class="text-right">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-2"></div>
+</div>

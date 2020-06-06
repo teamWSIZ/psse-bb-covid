@@ -11,6 +11,9 @@ import {ChartsModule} from "ng2-charts";
 import { StatsComponent } from './stats/stats.component';
 import { AdmComponent } from './adm/adm.component';
 import { HealthComponent } from './health/health.component';
+import { DetailsComponent } from './details/details.component';
+import { MapsComponent } from './maps/maps.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +23,9 @@ import { HealthComponent } from './health/health.component';
     StatsComponent,
     AdmComponent,
     HealthComponent,
+    DetailsComponent,
+    MapsComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,

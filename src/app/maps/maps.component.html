@@ -1,1 +1,16 @@
-<p>maps works!</p>
+<div class="row no-gutters">
+  <div class="col-md-4">
+    <div class="banner">Nowe zarażenia potwierdzone na dany dzień</div>
+    <app-postcard *ngFor="let p of np_posts" [p]="p"></app-postcard>
+  </div>
+
+  <div class="col-md-4">
+    <div class="banner">Średnia tygodniowa nowych zarażeń</div>
+    <app-postcard *ngFor="let p of np7_posts" [p]="p"></app-postcard>
+  </div>
+
+  <div class="col-md-4">
+    <div class="banner">Średnia tygodniowa liczby osób na kwarantannie</div>
+    <app-postcard *ngFor="let p of q7_posts" [p]="p"></app-postcard>
+  </div>
+</div>

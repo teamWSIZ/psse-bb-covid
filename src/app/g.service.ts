@@ -10,18 +10,27 @@ import {tap} from "rxjs/operators";
 export class GService {
   admin = false;
   pass = 'abra kadabra';
-  data = 'http://0.0.0.0:5206';
+  // data = 'http://0.0.0.0:5206';
+  data = 'https://covid.wsi.edu.pl/api'
 
   gdate_changed = new EventEmitter();
 
-  constructor(private http: HttpClient) {
-  }
 
   nodes: Map<number, RegionNode> = new Map();
   node_list: RegionNode[] = [];
 
   //globally-set date; start with yesterday
-  gdate = new Date(new Date().setTime(new Date().getTime() - 86400000));
+  gdate: Date;
+
+  constructor(private http: HttpClient) {
+    console.log('cstr');
+    let today = new Date();
+    if (today.getHours() < 18) {
+      this.gdate = new Date(new Date().setTime(new Date().getTime() - 86400000)); //yesterday
+    } else {
+      this.gdate = today;
+    }
+  }
 
 
   load_nodes(): Observable<RegionNode[]> {
@@ -32,7 +41,7 @@ export class GService {
       return this.http.get<RegionNode[]>(url).pipe(
         tap(nn => {
           this.node_list = nn;
-          console.log(`got ${nn.length} nodes`)
+          console.log(`got ${nn.length} nodes`);
           nn.forEach(n => this.nodes.set(n.id, n));
         })
       );
@@ -44,7 +53,8 @@ export class GService {
 
   add_date(days: number) {
     //Add `days` to this.gdate
-    console.log(`modifying date`);
+    if (this.gdate.getTime() >= new Date().getTime() - 1000 * 60 * 4 && days > 0) return;  //not beyond now
+    if (this.gdate <= new Date('2020-06-01') && days < 0) return; //no data earlier
     this.gdate = new Date(this.gdate.setTime(this.gdate.getTime() + days * 86400000));
     this.gdate_changed.emit('changed');
   }

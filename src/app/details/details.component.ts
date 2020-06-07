@@ -31,7 +31,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.gdate_changed_subscription = this.g.gdate_changed.subscribe(msg => {
       this.load_data(this.nodeid);
-    })
+    });
     this.route.params.subscribe(params => {
       this.nodeid = parseInt(params['nodeid']);
 
@@ -45,8 +45,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   load_data(nodeid: number) {
-    console.log(`loading daily data for all subregions of ${nodeid}`);
-    let url = this.g.data + `/nodes/${nodeid}/data?day=${this.g.gdate.toISOString()}`;
+    console.log(`loading daily data for all subregions of ${nodeid} for ${this.g.gdate}`);
+    let url = this.g.data + `/nodes/${nodeid}/data?day=${this.g.gdate.toLocaleDateString()}`;
     this.http.get<CaseData[]>(url).subscribe(dd => {
       this.subnode_data = dd;
     });
@@ -54,6 +54,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   navigate_to_region(nodeid: number) {
     if (nodeid===0) return;
+    if (this.g.nodes.get(nodeid).leaf) return;//dont navigate to leafs -- nothing to be seen there
     this.router.navigate(['/details', nodeid]);
   }
 
@@ -77,5 +78,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
 
+  wheel(event: WheelEvent) {
+    if (event.deltaY < -2) {
+      this.navigate_to_region(this.node.pid);
+    }
+  }
 
+  region_up_name(): string {
+    return `do ${this.g.nodes.get(this.node.pid).name}`
+  }
 }

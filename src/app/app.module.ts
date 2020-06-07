@@ -14,6 +14,12 @@ import { HealthComponent } from './health/health.component';
 import { DetailsComponent } from './details/details.component';
 import { MapsComponent } from './maps/maps.component';
 import { InfoComponent } from './info/info.component';
+import { AlertsComponent } from './alerts/alerts.component';
+import { PostcardComponent } from './postcard/postcard.component';
+import { registerLocaleData } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import localePl from '@angular/common/locales/pl';
+registerLocaleData(localePl, 'pl');
 
 @NgModule({
   declarations: [
@@ -26,6 +32,8 @@ import { InfoComponent } from './info/info.component';
     DetailsComponent,
     MapsComponent,
     InfoComponent,
+    AlertsComponent,
+    PostcardComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,7 @@ import { InfoComponent } from './info/info.component';
     HttpClientModule,
     ChartsModule
   ],
-  providers: [MenuComponent],
+  providers: [MenuComponent, { provide: LOCALE_ID, useValue: 'pl' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

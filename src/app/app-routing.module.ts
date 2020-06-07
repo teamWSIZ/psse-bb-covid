@@ -7,6 +7,7 @@ import {HealthComponent} from './health/health.component';
 import {DetailsComponent} from "./details/details.component";
 import {MapsComponent} from "./maps/maps.component";
 import {InfoComponent} from "./info/info.component";
+import {AlertsComponent} from "./alerts/alerts.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'details/1', pathMatch: 'full'},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'stats/:nodeid', component: StatsComponent},
   { path: 'health', component: HealthComponent },
   { path: 'maps', component: MapsComponent },
+  { path: 'alerts', component: AlertsComponent },
   { path: 'info', component: InfoComponent },
   { path: 'details/:nodeid', component: DetailsComponent },
 ];

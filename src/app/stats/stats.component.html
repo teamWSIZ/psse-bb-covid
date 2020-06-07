@@ -18,30 +18,36 @@
 
       <div class="card-body">
 
-        <table class="table table-hover">
-          <thead class="thead-dark">
-          <tr>
-            <th scope="col">Data</th>
-            <th scope="col" title="Łącznie z wynikiem dodatnim">wynik (+)</th>
-            <th scope="col" title="Nowe z wynikiem dodatnim">nowe wynik (+)</th>
-            <th scope="col" title="Suma nowych z wynikiem dodatnim za ostatnie 7 dni">średnia wynik (+)  </th>
-            <th scope="col" title="Kwarantanna na dziś">kwarantanna</th>
-            <th scope="col" title="Średnia liczba przypadków w kwarantannie za ostatnie 7 dni">średnia kwarantanna</th>
-            <th scope="col" title="Suma przypadków śmiertelnych">zmarłych</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let d of case_data">
-            <td class="w-40">{{d.data | date: 'yyyy-MM-dd'}}</td>
-            <td class="w-10">{{d.p}}</td>
-            <td class="w-10">{{d.np}}</td>
-            <td class="w-10">{{d.np7}}</td>
-            <td class="w-10">{{d.q}}</td>
-            <td class="w-10">{{d.q7}}</td>
-            <td class="w-10">{{d.d}}</td>
-          </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+
+          <table class="table table-hover table-sm">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Data</th>
+              <th scope="col" title="Łącznie z wynikiem dodatnim">wynik (+)</th>
+              <th scope="col" title="Nowe z wynikiem dodatnim">nowe wynik (+)</th>
+              <th scope="col" title="Średnia dzienna nowych przypadków z wynikiem dodatnim za ostatnie 7 dni">średnia
+                wynik (+)
+              </th>
+              <th scope="col" title="Liczba osób na lokalnej kwarantannie (PPIS)">kwarantanna</th>
+              <th scope="col" title="Średnia dzienna liczba osób w kwarantannie za ostatnie 7 dni">średnia kwarantanna
+              </th>
+              <th scope="col" title="Suma przypadków śmiertelnych">zmarłych</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let d of case_data">
+              <td class="w-40">{{d.data | date: 'yyyy-MM-dd'}}</td>
+              <td class="w-10">{{d.p}}</td>
+              <td class="w-10">{{d.np}}</td>
+              <td class="w-10">{{d.np7}}</td>
+              <td class="w-10">{{d.q}}</td>
+              <td class="w-10">{{d.q7}}</td>
+              <td class="w-10">{{d.d}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
 
 
       </div>

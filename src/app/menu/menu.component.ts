@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GService} from '../g.service';
 
 @Component({
@@ -11,6 +11,7 @@ export class MenuComponent implements OnInit {
   constructor(public g: GService) { }
 
   ngOnInit() {
+
   }
 
 }

@@ -1,16 +1,19 @@
 <div class="row no-gutters">
   <div class="col-md-4">
-    <div class="banner">Nowe zarażenia potwierdzone na dany dzień</div>
-    <app-postcard *ngFor="let p of np_posts" [p]="p"></app-postcard>
+    <div class="banner text-center">Nowe zarażenia potwierdzone na dany dzień</div>
+    <app-postcard *ngFor="let p of np_posts" [p]="p"
+                  [header]="'Nowe zarażenia potwierdzone'" [height]="240"></app-postcard>
   </div>
 
   <div class="col-md-4">
-    <div class="banner">Średnia tygodniowa nowych zarażeń</div>
-    <app-postcard *ngFor="let p of np7_posts" [p]="p"></app-postcard>
+    <div class="banner text-center">Średnia tygodniowa nowych zarażeń</div>
+    <app-postcard *ngFor="let p of np7_posts" [p]="p"
+                  [header]="'Średnia tygodniowa nowych zarażeń'" [height]="240"></app-postcard>
   </div>
 
   <div class="col-md-4">
-    <div class="banner">Średnia tygodniowa liczby osób na kwarantannie</div>
-    <app-postcard *ngFor="let p of q7_posts" [p]="p"></app-postcard>
+    <div class="banner text-center">Średnia tygodniowa liczby osób na kwarantannie</div>
+    <app-postcard *ngFor="let p of q7_posts" [p]="p"
+                  [header]="'Średnia tygodniowa liczby osób na kwarantannie'" [height]="240"></app-postcard>
   </div>
 </div>

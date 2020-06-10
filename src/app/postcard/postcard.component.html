@@ -1,8 +1,34 @@
-<div class="card">
-  <div class="card-body">
-    <a [href]="p.imgurl">
-      <img [src]="p.imgurl" height="240px">
-    </a>
-    {{p.created | date: 'd MMMM'}}
+<!--<div class="card">-->
+<!--  <div class="card-body" (click)="show_img()">-->
+<!--    <img [src]="g.thumbnail(p.imgurl)" [height]="height">-->
+<!--    <span *ngIf="showdate"> {{p.created | date: 'd MMMM'}} </span>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div (click)="show_img()">
+  <img [src]="g.thumbnail(p.imgurl)" [height]="height">
+  <span *ngIf="showdate" style="display: inline-block"> {{p.created | date: 'd MMMM'}} </span>
+</div>
+
+
+
+
+<div class="modal" [id]="mod_id()" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" >
+        <h4 class="modal-title"><strong>{{header}} na {{p.created | date: 'd MMMM yyyy'}}</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div>
+          <a [href]="p.imgurl" (click)="show_img()">
+            <img [src]="p.imgurl" width="100%">
+          </a>
+        </div>
+        <div class="modal-footer">
+        Dane z placówek PSSE regionu. Na wykresach kolor filetowy oznacza zerową liczbę przypadków, a kolory niebiesko-żółte dużą liczbę przypadków. Dodatkowo używamy skali logarytmicznej podkreślającej regiony o mniejszych wartościach liczbowych, np kolor "2" oznacza 7 przypadków, kolor "4" 50 przypadków, a kolor "6" 400 przypadków.
+        </div>
+      </div>
+    </div>
   </div>
 </div>

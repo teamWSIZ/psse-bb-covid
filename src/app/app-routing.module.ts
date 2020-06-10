@@ -10,13 +10,11 @@ import {InfoComponent} from "./info/info.component";
 import {AlertsComponent} from "./alerts/alerts.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'details/1', pathMatch: 'full'},
-  // { path: 'home', component: HomeComponent },
-  // { path: 'adm', component: AdmComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full'},
   { path: 'stats/:nodeid', component: StatsComponent},
   { path: 'health', component: HealthComponent },
   { path: 'maps', component: MapsComponent },
-  { path: 'alerts', component: AlertsComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'info', component: InfoComponent },
   { path: 'details/:nodeid', component: DetailsComponent },
 ];

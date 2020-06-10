@@ -1,4 +1,11 @@
 import {Component, OnInit} from '@angular/core';
+import {CaseData} from "../_model/case-data";
+import {RegionNode} from "../_model/region-node";
+import {ActivatedRoute, Router} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {GService} from "../g.service";
+import {DailyReport} from "../stats/daily-report";
+import {Post} from "../_model/post";
 
 @Component({
   selector: 'app-home',
@@ -6,65 +13,117 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
-  my_champion = 'Panteon';
-  new_champion = '';
-  user = 'Wu Xilao!';
-  x = 10;
 
-  constructor() {
+  case_data: CaseData[];
+  lastdata: CaseData;
+
+  nodeid = 1;
+  node = RegionNode.dummy();
+
+  labels = []
+  darkblue = 'rgb(69,114,123)'
+  datasets_np7 = [
+    {
+      data: [],
+      label: 'Dzienna liczba zarażeń (krocząca średnia 7-dniowa)',
+      backgroundColor: 'rgba(255, 255, 255, 0.0)',
+      borderColor: this.darkblue,
+      pointBorderColor: this.darkblue,
+      pointBackgroundColor: this.darkblue,
+      pointHoverBorderColor: this.darkblue
+    }
+  ]
+  datasets_q7 = [
+    {
+      data: [],
+      label: 'Dzienna liczba osób na kwarantannie (krocząca średnia 7-dniowa)',
+      backgroundColor: 'rgba(255, 255, 255, 0.0)',
+      borderColor: this.darkblue,
+      pointBorderColor: this.darkblue,
+      pointBackgroundColor: this.darkblue,
+      pointHoverBorderColor: this.darkblue
+    }
+  ]
+  chart_type = 'line';
+  chart_options = {
+    animation: {
+      duration: 1
+    },
+    scales: {
+      xAxes: [{
+        type: 'time',
+        time: {
+          unit: 'day',
+          unitStepSize: 1,
+          displayFormats: {
+            'millisecond': 'MM / DD',
+            'second': 'MM / DD',
+            'minute': 'MM / DD',
+            'hour': 'MM / DD',
+            'day': 'MM / DD',
+            'week': 'MM / DD',
+            'month': 'MM / DD',
+            'quarter': 'MM / DD',
+            'year': 'MM / DD',
+          }
+        }
+      }],
+    },
+  }
+  new_positives_map: Post;
+
+
+  private data_into_plots() {
+    let dates = [];
+    let vals_np7 = [];
+    let vals_q7 = [];
+    this.lastdata = this.case_data[0];
+    this.case_data.forEach(d => {
+      dates.push(d.data);
+      vals_np7.push(d.np7);
+      vals_q7.push(d.q7);
+    });
+    vals_np7.reverse();
+    vals_q7.reverse();
+    dates.reverse();
+    this.datasets_np7[0].data = vals_np7;
+    this.labels = dates;
+    this.datasets_q7[0].data = vals_q7;
+    this.labels = dates;
+  }
+
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router,
+              public g: GService) {
   }
 
   ngOnInit() {
+    this.lastdata = new CaseData();
+    this.new_positives_map = Post.dummy();
+
+      this.g.load_nodes().subscribe(nn => {
+        this.node = this.g.nodes.get(this.nodeid);
+        this.load_timeline_data(this.nodeid);
+      });
+    let url = this.g.data + `/posts?catid=2`;
+    this.http.get<Post[]>(url).subscribe(pp => {
+      this.new_positives_map = pp[0];
+    });
   }
 
-  increaseTemperature() {
-    this.x = this.x + 1;
+
+  private load_timeline_data(nodeid: number) {
+    let url = this.g.data + `/timeline/${nodeid}`;
+    this.http.get<CaseData[]>(url).subscribe(dd => {
+      this.case_data = dd;
+      this.data_into_plots();
+      //todo: update_main_date
+    });
   }
 
-  decreaseTemperature() {
-    this.x = this.x - 1;
+  navigate_to_region() {
+    this.router.navigate(['/details', 1]);
   }
 
-  doIt() {
-    this.my_champion = 'Nasus';
-  }
-
-  championJax() {
-    this.my_champion = 'Jax';
-  }
-
-  //to jest funkcja która dostaje jeden argument: string (tzn. napis); można jej użyć z różnymi wartościami
-  //tego argumentu...
-  liczba: string;
-  liczbaff: string;
-
-  set_champion(champion_name: string) {
-    this.my_champion = champion_name;
-  }
-
-  update_champion() {
-    if (this.new_champion.startsWith('Vei')) {
-      alert('Champions starting with "Vei" are banned!');
-    } else {
-      this.my_champion = this.new_champion;
-    }
-  }
-
-  check_parity() {
-    //sprawdzić czy this.liczba (zamieniona na number z string), jest parzysta czy nie
-    // można korzystać z (5 % 2) to reszta z dzielenia 5 przez 2
-    //jeśli jest parzysta, to dać alert "liczba parzysta"
-    let x = parseInt(this.liczba);
-    if (Number.isNaN(x)) {
-      alert('Input nie jest liczbą');
-      return;
-    }
-    if (x % 2 == 0) {
-      alert('Liczba parzysta');
-    } else {
-      alert('Liczba nieparzysta');
-    }
-  }
 
 }
 

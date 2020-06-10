@@ -1,5 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from "../_model/post";
+import {GService} from "../g.service";
+
+declare var $: any;
+
 
 @Component({
   selector: 'app-postcard',
@@ -9,10 +13,24 @@ import {Post} from "../_model/post";
 export class PostcardComponent implements OnInit {
   @Input()
   p : Post;
+  @Input()
+  header: string;
+  @Input()
+  height: number;
+  @Input()
+  showdate: boolean = true;
 
-  constructor() { }
+  constructor(public g:GService) { }
 
   ngOnInit() {
   }
 
+  mod_id() {
+    return 'mod' + this.p.id;
+  }
+
+
+  show_img() {
+    $('#' + this.mod_id()).modal('show');
+  }
 }

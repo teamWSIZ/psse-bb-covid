@@ -1,8 +1,32 @@
 <div class="row no-gutters">
-  <div class="col-md-2"></div>
-
-  <div class="col-md-8">
+  <div class="col-md-5">
     <div class="card m-2">
+      <div class="card-header h4">Zarażenia (wynik dodatni testu)</div>
+      <div class="card-body">
+        <canvas baseChart
+                [datasets]="datasets_np7"
+                [labels]="labels"
+                [chartType]="chart_type"
+                [options]="chart_options"
+                height="150"
+        ></canvas>
+      </div>
+    </div>
+    <div class="card m-2">
+      <div class="card-header h4">Liczba osób na kwarantannie</div>
+      <div class="card-body">
+        <canvas baseChart
+                [datasets]="datasets_q7"
+                [labels]="labels"
+                [chartType]="chart_type"
+                [options]="chart_options"
+                height="150"
+        ></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="card mt-2">
       <div class="card-header">
 
         <div class="row">
@@ -59,8 +83,6 @@
 
     </div>
   </div>
-
-  <div class="col-md-2"></div>
 </div>
 
 

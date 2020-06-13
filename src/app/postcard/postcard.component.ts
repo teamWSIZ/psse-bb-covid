@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Post} from "../_model/post";
 import {GService} from "../g.service";
+import {Router} from "@angular/router";
 
 declare var $: any;
 
@@ -20,7 +21,7 @@ export class PostcardComponent implements OnInit {
   @Input()
   showdate: boolean = true;
 
-  constructor(public g:GService) { }
+  constructor(public g:GService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -33,4 +34,9 @@ export class PostcardComponent implements OnInit {
   show_img() {
     $('#' + this.mod_id()).modal('show');
   }
+
+  navigate_to_map(postid: number) {
+    this.router.navigate(['/map', postid]);
+  }
+
 }

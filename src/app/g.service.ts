@@ -10,7 +10,7 @@ import {tap} from "rxjs/operators";
 export class GService {
   admin = false;
   pass = 'abra kadabra';
-  // data = 'http://0.0.0.0:5206';
+  // data = 'http://0.0.0.0:6206';
   data = 'https://covid.wsi.edu.pl/api'
 
   gdate_changed = new EventEmitter();
@@ -25,7 +25,7 @@ export class GService {
   constructor(private http: HttpClient) {
     // console.log('cstr');
     let today = new Date();
-    if (today.getHours() < 18) {
+    if (today.getHours() < 20) {
       this.gdate = new Date(new Date().setTime(new Date().getTime() - 86400000)); //yesterday
     } else {
       this.gdate = today;
@@ -36,12 +36,10 @@ export class GService {
   load_nodes(): Observable<RegionNode[]> {
     //load only once per app
     if (this.nodes.size == 0) {
-      // console.log(`loading all nodes..`);
       let url = this.data + `/all_nodes`;
       return this.http.get<RegionNode[]>(url).pipe(
         tap(nn => {
           this.node_list = nn;
-          // console.log(`got ${nn.length} nodes`);
           nn.forEach(n => this.nodes.set(n.id, n));
         })
       );
@@ -65,5 +63,13 @@ export class GService {
     let host = url.substr(0, at);
     let map = url.substr(at);
     return `${host}sm_${map}`;
+  }
+
+  xsthumbnail(url: string): string {
+    //compute thumbnail location for given global map location; essentially filename = "sm_{map_filename}"
+    let at = url.indexOf('covid');
+    let host = url.substr(0, at);
+    let map = url.substr(at);
+    return `${host}xs_${map}`;
   }
 }

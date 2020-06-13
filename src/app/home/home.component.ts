@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
       }],
     },
   }
-  new_positives_map: Post;
+  home_map: Post;
 
 
   private data_into_plots() {
@@ -98,15 +98,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.lastdata = new CaseData();
-    this.new_positives_map = Post.dummy();
+    this.home_map = Post.dummy();
 
-      this.g.load_nodes().subscribe(nn => {
-        this.node = this.g.nodes.get(this.nodeid);
-        this.load_timeline_data(this.nodeid);
-      });
+    this.g.load_nodes().subscribe(nn => {
+      this.node = this.g.nodes.get(this.nodeid);
+      this.load_timeline_data(this.nodeid);
+    });
     let url = this.g.data + `/posts?catid=2`;
     this.http.get<Post[]>(url).subscribe(pp => {
-      this.new_positives_map = pp[0];
+      this.home_map = pp[0];
     });
   }
 
@@ -122,6 +122,10 @@ export class HomeComponent implements OnInit {
 
   navigate_to_region() {
     this.router.navigate(['/details', 1]);
+  }
+
+  navigate_to_map(postid: number) {
+    this.router.navigate(['/map', postid]);
   }
 
 

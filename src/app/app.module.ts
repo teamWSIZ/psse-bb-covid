@@ -19,6 +19,7 @@ import { PostcardComponent } from './postcard/postcard.component';
 import { registerLocaleData } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import localePl from '@angular/common/locales/pl';
+import { MapComponent } from './map/map.component';
 registerLocaleData(localePl, 'pl');
 
 @NgModule({
@@ -34,6 +35,7 @@ registerLocaleData(localePl, 'pl');
     InfoComponent,
     AlertsComponent,
     PostcardComponent,
+    MapComponent,
   ],
   imports: [
     BrowserModule,

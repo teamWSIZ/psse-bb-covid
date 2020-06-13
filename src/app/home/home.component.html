@@ -58,14 +58,12 @@
           </table>
         </div>
         <p class="text-center" style="margin-top: -10px">
-          <app-postcard [p]="new_positives_map"
-                        [header]="'Średnia dzienna liczba zarażeń'" [height]="450" [showdate]="false"></app-postcard>
+
+        <div (click)="navigate_to_map(home_map.id)" *ngIf="home_map.id>0">
+          <img [src]="g.thumbnail(home_map.imgurl)" [height]="450">
+        </div>
 
 
-<!--          <a [href]="new_positives_map.imgurl">-->
-<!--            <img [src]="g.thumbnail(new_positives_map.imgurl)" height="450px">-->
-<!--          </a>-->
-        </p>
       </div>
 
     </div>

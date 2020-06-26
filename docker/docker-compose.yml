@@ -5,13 +5,13 @@ services:
   # docker stack deploy -c docker-compose.yml mswarm1
   covid:
     # replace username/repo:tag with your name and image details
-    image: rq170/covid:2.0.8
+    image: rq170/covid:2.0.13
     deploy:
       replicas: 3
       resources:
         limits:
           cpus: "0.5"
-          memory: 350M
+          memory: 100M
 
       restart_policy:
         condition: on-failure

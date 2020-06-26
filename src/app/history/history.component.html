@@ -1,0 +1,22 @@
+<div class="row no-gutters">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header h4">Historia zasad raportowania i zmian w systemie</div>
+      <div class="card-body">
+
+        <p *ngFor="let l of historylines">
+          <strong>{{l.created | date : 'dd/MM/yyyy'}}</strong><br>
+          {{l.content}}
+        </p>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+  <div class="col-md-1"></div>
+
+</div>

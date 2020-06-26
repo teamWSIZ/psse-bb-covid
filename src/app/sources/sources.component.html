@@ -1,0 +1,43 @@
+<div class="row no-gutters">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header h4">Źródła danych</div>
+      <div class="card-body">
+        Na chwilę obecną korzystamy wyłącznie z danych prezentowanych bezpośrednio
+        przez Powiatowe Stacje Sanitarno-Epidemiologiczne (PSSE) województw: Śląskiego i
+        Małopolskiego. Dane zbieramy około godziny 19, i staramy się opublikować raport przed godziną 20.
+        Jeśli niektóre stacje spóźniają się z raportem, to ich dane doliczamy przez update systemu
+        późnym wieczorem. Poniższa tabela zawiera linki bezpośrednio prowadzące do stron
+        z których odczytujemy dane.
+
+        <div class="m-4">
+
+          <table class="table table-hover table-sm">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">Siedziba PSSE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let l of sourceslines">
+              <td>
+                <a [href]="l.content">{{l.title}}</a>
+
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </div>
+  <div class="col-md-2"></div>
+
+</div>

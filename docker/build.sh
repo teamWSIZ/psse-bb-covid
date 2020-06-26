@@ -9,7 +9,7 @@ version=$1
 echo "########## Building $version"
 
 echo "########## Angular build"
-ng build --prod
+#ng build --prod
 
 echo "########## Docker build"
 cp Dockerfile ../dist/webstart2019

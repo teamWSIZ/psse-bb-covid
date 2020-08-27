@@ -22,6 +22,7 @@ import localePl from '@angular/common/locales/pl';
 import { MapComponent } from './map/map.component';
 import { HistoryComponent } from './history/history.component';
 import { SourcesComponent } from './sources/sources.component';
+import { RecommendComponent } from './recommend/recommend.component';
 registerLocaleData(localePl, 'pl');
 
 @NgModule({
@@ -40,6 +41,7 @@ registerLocaleData(localePl, 'pl');
     MapComponent,
     HistoryComponent,
     SourcesComponent,
+    RecommendComponent,
   ],
   imports: [
     BrowserModule,

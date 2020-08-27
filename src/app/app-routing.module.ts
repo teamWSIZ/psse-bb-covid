@@ -11,6 +11,7 @@ import {AlertsComponent} from "./alerts/alerts.component";
 import {MapComponent} from "./map/map.component";
 import {HistoryComponent} from "./history/history.component";
 import {SourcesComponent} from "./sources/sources.component";
+import {RecommendComponent} from "./recommend/recommend.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'info', component: InfoComponent },
   { path: 'history', component: HistoryComponent },
   { path: 'sources', component: SourcesComponent },
+  { path: 'recommendations', component: RecommendComponent },
   { path: 'map/:postid', component: MapComponent},
   { path: 'stats/:nodeid', component: StatsComponent},
   { path: 'details/:nodeid', component: DetailsComponent },

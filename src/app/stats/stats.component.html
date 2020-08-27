@@ -42,6 +42,13 @@
 
       <div class="card-body">
 
+
+        <p *ngIf="node.pop>1">
+          Populacja: {{node.pop}} tys.
+          <span class="zone_yellow ml-4"> żółty: {{yellow}}/dzień </span>
+          <span class="zone_red ml-4"> czerwony: {{red}}/dzień </span>
+        </p>
+
         <div class="table-responsive">
 
           <table class="table table-hover table-sm">
@@ -64,7 +71,8 @@
               <td class="w-40">{{d.data | date: 'yyyy-MM-dd'}}</td>
               <td class="w-10">{{d.p}}</td>
               <td class="w-10">{{d.np}}</td>
-              <td class="w-10">{{d.np7}}</td>
+              <td class="w-10" [ngClass]="{'zone_yellow':is_yellow(d.np7), 'zone_red':is_red(d.np7)}">
+                {{d.np7}}</td>
               <td class="w-10">{{d.q}}</td>
               <td class="w-10">{{d.q7}}</td>
               <td class="w-10">{{d.d}}</td>

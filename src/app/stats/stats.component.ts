@@ -70,6 +70,9 @@ export class StatsComponent implements OnInit {
       }],
     },
   }
+  private yellow: number;
+  private red: number;
+  private has_pop = false;
 
 
   private data_into_plots() {
@@ -103,12 +106,26 @@ export class StatsComponent implements OnInit {
       this.g.load_nodes().subscribe(nn => {
         this.node = this.g.nodes.get(this.nodeid);
         this.load_timeline_data(this.nodeid);
+        this.has_pop = (this.node.pop>1);
+        this.yellow = this.g.yellow(this.node);
+        this.red = this.g.red(this.node);
       });
     })
 
     this.clear_edited_report();
 
   }
+
+  is_yellow(n7 :number) {
+    if (!this.has_pop) return false;
+    return n7 >= this.yellow && n7 < this.red;
+  }
+
+  is_red(n7 :number) {
+    if (!this.has_pop) return false;
+    return n7 >= this.red;
+  }
+
 
 
   clear_edited_report() {

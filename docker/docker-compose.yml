@@ -5,7 +5,7 @@ services:
   # docker stack deploy -c docker-compose.yml mswarm1
   covid:
     # replace username/repo:tag with your name and image details
-    image: rq170/covid:2.0.13
+    image: rq170/covid:2.2.1
     deploy:
       replicas: 3
       resources:
